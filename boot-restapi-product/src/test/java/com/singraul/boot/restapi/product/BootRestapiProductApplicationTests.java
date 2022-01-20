@@ -19,6 +19,7 @@ class BootRestapiProductApplicationTests {
 	   Assert.notNull(product);
 	   Assert.hasText(product.getProdName(), "Torch");
 	}
+	@SuppressWarnings("deprecation")
 	@Test
   void testCreateProduct() {
 	  
@@ -33,5 +34,17 @@ class BootRestapiProductApplicationTests {
 	Assert.notNull(postForObject.getProdId());
 	Assert.hasText("Samasung Galaxy", postForObject.getProdName());
   }
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	void testUpdateProduct() {
+		Product product = rest.getForObject("http://localhost:8080/product-rest-api/products/105", Product.class);
+		product.setPrice(9000);
+		 rest.put("http://localhost:8080/product-rest-api/products/", product);
+		 
+		Product updatedProduct = rest.getForObject("http://localhost:8080/product-rest-api/products/105", Product.class);
+		
+		Assert.isTrue(updatedProduct.getPrice() ==9000);
+	}
 	
 }
