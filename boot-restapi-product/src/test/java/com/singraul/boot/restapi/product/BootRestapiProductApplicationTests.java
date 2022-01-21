@@ -19,7 +19,7 @@ class BootRestapiProductApplicationTests {
 	@SuppressWarnings("deprecation")
 	@Test
 	void testGetApi() {
-
+		System.out.println("BaseURL : "+BaseURL);
 //	Product product = rest.getForObject("http://localhost:8080/product-rest-api/products/102", Product.class);
 		Product product = rest.getForObject(BaseURL + "102", Product.class);
 		System.out.println("product " + product);
@@ -30,7 +30,7 @@ class BootRestapiProductApplicationTests {
 	@SuppressWarnings("deprecation")
 	@Test
 	void testCreateProduct() {
-
+		System.out.println("== BaseURL == "+BaseURL);
 		Product productObj = new Product();
 		productObj.setProdName("Samasung Galaxy");
 		productObj.setProdDesc("This is best mobile in 4GB RAM memory.");
@@ -49,6 +49,7 @@ class BootRestapiProductApplicationTests {
 	@SuppressWarnings("deprecation")
 	@Test
 	void testUpdateProduct() {
+		System.out.println("=== BaseURL === "+BaseURL);
 		// Product product =
 		// rest.getForObject("http://localhost:8080/product-rest-api/products/105",
 		// Product.class);
