@@ -24,13 +24,15 @@ public class ProductRestController {
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	public List<Product> getAllProduct() {
 		log.info("Method : getAllProduct ");
+		log.error("Error log getAllProduct");
 		return prodRepository.findAll();
 	}
 
 	@RequestMapping(value = "/products/{prodId}", method = RequestMethod.GET)
-	public Product getProduct(@PathVariable("prodId") int prodId) {
-		log.info("Method : getProduct ");
+	public Product getProductById(@PathVariable("prodId") int prodId) {
+		log.info("Method : getProductById ");
 		log.info("Parameter : prodId "+prodId);
+		log.error("Error log getProductById");
 		return prodRepository.findById(prodId).get();
 	}
 

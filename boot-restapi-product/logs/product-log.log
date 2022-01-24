@@ -1,0 +1,2 @@
+2022-01-24 15:02:36.234 ERROR 14736 --- [XNIO-1 task-1] c.s.b.r.p.c.ProductRestController        : Error log getProductById
+2022-01-24 15:03:15.659 ERROR 14736 --- [XNIO-1 task-1] c.s.b.r.p.c.ProductRestController        : Error log getAllProduct
