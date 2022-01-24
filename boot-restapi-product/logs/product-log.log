@@ -1,2 +1,4 @@
-2022-01-24 15:02:36.234 ERROR 14736 --- [XNIO-1 task-1] c.s.b.r.p.c.ProductRestController        : Error log getProductById
-2022-01-24 15:03:15.659 ERROR 14736 --- [XNIO-1 task-1] c.s.b.r.p.c.ProductRestController        : Error log getAllProduct
+2022-01-24 15:48:12.291  INFO 14848 --- [RMI TCP Connection(3)-127.0.0.1] io.undertow                              : stopping server: Undertow - 2.2.14.Final
+2022-01-24 15:48:12.301  INFO 14848 --- [RMI TCP Connection(3)-127.0.0.1] io.undertow.servlet                      : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2022-01-24 15:48:12.308  INFO 14848 --- [RMI TCP Connection(3)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-01-24 15:48:12.314  INFO 14848 --- [RMI TCP Connection(3)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
