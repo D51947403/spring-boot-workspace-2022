@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.singraul.boot.thymeleaf.model.Student;
+
 @Controller
 public class HelloController {
 
@@ -20,5 +22,14 @@ public class HelloController {
 		mav.addObject("message", "Take up one idea and make your life easy.");
 		return mav;
 
+	}
+	@RequestMapping(value = "/student", method = RequestMethod.GET)
+	public ModelAndView getStudent() {
+		ModelAndView mav = new ModelAndView("student");
+		Student student= new Student();
+		student.setName("Devendra");
+		student.setScore(86);
+		mav.addObject("studentObj", student);
+		return mav;
 	}
 }
