@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th=https://www.thymeleaf.org/ >
+<head>
+<meta charset="ISO-8859-1">
+<title>Student List</title>
+</head>
+<body>
+
+	<h3>Student Details</h3>
+
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Score</th>
+		</tr>
+		<tr th:each="studentObj:${studentList}">
+			<td th:text="${studentObj.name}"></td>
+			<td th:text="${studentObj.score}"></td>
+		</tr>
+
+	</table>
+
+
+
+</body>
+</html>
