@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,6 +37,7 @@ public class HelloController {
 		mav.addObject("studentObj", student);
 		return mav;
 	}
+
 	@RequestMapping(value = "/studentList", method = RequestMethod.GET)
 	public ModelAndView getStudentList() {
 
@@ -58,9 +60,27 @@ public class HelloController {
 		student4.setScore(80);
 
 		List<Student> studentList = Arrays.asList(student, student2, student3, student4);
-		
+
 		mav.addObject("studentList", studentList);
 
 		return mav;
 	}
+
+	@RequestMapping(value = "/studentForm", method = RequestMethod.GET)
+	public ModelAndView openStudentForm() {
+		ModelAndView mav = new ModelAndView("studentForm");
+		Student student = new Student();
+		student.setName("Devendra");
+		student.setScore(86);
+		mav.addObject("studentForm", student);
+		return mav;
+	}
+
+	@RequestMapping(value = "/saveStudent", method = RequestMethod.POST)
+	public ModelAndView saveStudent(@ModelAttribute Student saveStudent) {
+		ModelAndView mav = new ModelAndView("saveStudent");
+		mav.addObject("saveStudent", saveStudent);
+		return mav;
+	}
+
 }
