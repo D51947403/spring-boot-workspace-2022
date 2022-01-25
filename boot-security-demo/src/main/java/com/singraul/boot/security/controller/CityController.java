@@ -12,4 +12,10 @@ public class CityController {
 		return "Welcome to Satna city";
 	}
 	
+	
+	@RequestMapping(value="/zipcode", method=RequestMethod.GET)
+	public String getZipCode() {
+		return "Satna zipcode is : 485001";
+	}
+	
 }
