@@ -1,29 +1,45 @@
 package com.singraul.coupon.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.singraul.coupon.model.Coupon;
 import com.singraul.coupon.repos.CouponRepo;
 
-@RestController
-@RequestMapping("/coupon-rest-api")
+@Controller
 public class CouponController {
 
 	@Autowired
 	CouponRepo couponRepo;
 
-	@RequestMapping(value = "/coupon", method = RequestMethod.POST)
-	public Coupon createCoupon(@RequestBody Coupon coupon) {
-		return couponRepo.save(coupon);
+	@GetMapping("/")
+	public String rootIndex() {
+		return "index";
 	}
 
-	@RequestMapping(value = "/coupon/{code}", method = RequestMethod.GET)
-	public Coupon getCouponByCode(@PathVariable("code") String code) {
-		return couponRepo.getCouponByCode(code);
+	@GetMapping("/index")
+	public String openIndex() {
+		return "index";
+	}
+
+	@GetMapping("/createCoupon")
+	public String createCoupon() {
+		return "createCoupon";
+	}
+
+	@PostMapping("/saveCoupon")
+	public String saveCoupon(Coupon coupon) {
+		couponRepo.save(coupon);
+		return "createdResponse";
+	}
+
+	@GetMapping("/getCoupon")
+	public ModelAndView getCoupon() {
+		ModelAndView mav = new ModelAndView("showCoupon");
+		mav.addObject("couponList", couponRepo.findAll());
+		return mav;
 	}
 }

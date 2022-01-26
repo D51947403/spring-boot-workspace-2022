@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html  xmlns:th=https://www.thymeleaf.org/>
+<head>
+<meta charset="ISO-8859-1">
+<title>Show Coupon </title>
+</head>
+<body>
+ <b> Show Coupon  </b> <br/><br/>
+<table>
+		<tr>
+			<th>Code</th>
+			<th>Discount</th>
+			<th>Expiry Date</th>
+		</tr>
+		<tr th:each="couponObj:${couponList}">
+			<td th:text="${couponObj.code}"></td>
+			<td th:text="${couponObj.discount}"></td>
+			<td th:text="${couponObj.expDate}"></td>
+		</tr>
+
+	</table>
+ 
+</body>
+</html>
