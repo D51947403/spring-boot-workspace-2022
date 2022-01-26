@@ -25,8 +25,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.httpBasic();
-		http.authorizeRequests().mvcMatchers(HttpMethod.GET, "/coupon-rest-api/coupon").hasAnyRole("ADMIN", "USER")
-				.mvcMatchers(HttpMethod.POST, "/coupon-rest-api/coupon").hasRole("ADMIN").and().csrf().disable();
+		// coupon code must be only ALPHABET --> Regular expression
+		http.authorizeRequests().mvcMatchers(HttpMethod.GET, "/coupon-rest-api/coupon/{code:^[A-Z]*$}").hasAnyRole("ADMIN", "USER")
+				.mvcMatchers(HttpMethod.POST, "/coupon-rest-api/coupon").hasRole("ADMIN").anyRequest().denyAll().and().csrf().disable();
 	}
 
 	@Bean
