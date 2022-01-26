@@ -30,9 +30,9 @@ public class ProductController {
 	@PostMapping("/product")
 	public Product createProduct(@RequestBody Product product) {
 
-		Coupon coupon = restTemplate.getForObject(coupanServiceURL + product.getCouponCode(), Coupon.class);
+		//Coupon coupon = restTemplate.getForObject(coupanServiceURL + product.getCouponCode(), Coupon.class);
 
-		product.setPrice(product.getPrice().subtract(coupon.getDiscount()));
+		//product.setPrice(product.getPrice().subtract(coupon.getDiscount()));
 
 		return prodRepo.save(product);
 	}
