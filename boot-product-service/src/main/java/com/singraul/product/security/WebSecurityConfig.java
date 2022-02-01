@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-	   http.httpBasic();
+	   //http.httpBasic();
 	   http.authorizeRequests().mvcMatchers(HttpMethod.GET, "/product-rest-api/product").hasAnyRole("ADMIN","USER")
 	   .mvcMatchers(HttpMethod.POST, "/product-rest-api/product").hasRole("ADMIN")
 	   .mvcMatchers(HttpMethod.GET, "/index").hasAnyRole("ADMIN","USER")
