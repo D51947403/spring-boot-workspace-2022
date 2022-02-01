@@ -15,10 +15,6 @@ public class CouponController {
 	@Autowired
 	CouponRepo couponRepo;
 
-	@GetMapping("/")
-	public String rootIndex() {
-		return "index";
-	}
 
 	@GetMapping("/index")
 	public String openIndex() {
