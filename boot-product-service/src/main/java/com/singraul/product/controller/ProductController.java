@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.singraul.product.dto.Coupon;
 import com.singraul.product.model.Product;
 import com.singraul.product.repos.ProductRepository;
 
