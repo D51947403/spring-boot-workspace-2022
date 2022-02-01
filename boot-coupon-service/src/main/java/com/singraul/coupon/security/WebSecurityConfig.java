@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().mvcMatchers(HttpMethod.GET, "/coupon-rest-api/coupon/{code:^[A-Z]*$}" 
 				,"/index" , "/getCoupon").hasAnyRole("ADMIN", "USER")
 				.mvcMatchers(HttpMethod.POST, "/coupon-rest-api/coupon" , "/createCoupon","/saveCoupon").hasRole("ADMIN")
-				.mvcMatchers("/login" ,"/").permitAll()
+				.mvcMatchers("/login" ,"/", "/showReg" ,"/registerUser").permitAll()
 				.anyRequest().denyAll().and().csrf().disable()
 				.logout().logoutSuccessUrl("/");
 	}
