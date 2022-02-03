@@ -15,6 +15,11 @@
 	
 	<br/>
 	<!-- for logout no need to write any controller method -->
-	<a href="/logout">Logout</a>
+	<!-- <a href="/logout">Logout</a> -->
+	
+		<!-- In case of csrf enabled post logout is working -->
+	<form th:action="@{/logout}" method="post">
+    <input type="submit" value="POST LOGOUT"></input>
+     </form>
 </body>
 </html>

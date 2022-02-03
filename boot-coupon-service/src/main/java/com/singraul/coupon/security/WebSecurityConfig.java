@@ -10,6 +10,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.security.web.util.matcher.RegexRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import com.singraul.coupon.service.UserDetailServiceImpl;
 @Configuration
@@ -28,15 +32,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// for custom login form this is not required
 		//http.formLogin();
 		// coupon code must be only ALPHABET --> Regular expression
-		http.authorizeRequests().mvcMatchers(HttpMethod.GET, "/coupon-rest-api/coupon/{code:^[A-Z]*$}" 
-				,"/index" , "/getCoupon","/createCoupon").hasAnyRole("ADMIN", "USER")
+		http.authorizeRequests().mvcMatchers(HttpMethod.GET, "/coupon-rest-api/coupon/{code:^[A-Z]*$}",
+				"/index" ,"/createCoupon").hasAnyRole("ADMIN", "USER")
 				.mvcMatchers(HttpMethod.POST, "/coupon-rest-api/coupon" , "/saveCoupon").hasRole("ADMIN")
-				.mvcMatchers("/login" ,"/", "/showReg" ,"/registerUser").permitAll()
+				.mvcMatchers("/login" ,"/" ,"/registerUser","/getCoupon","/showReg").permitAll()
 				// disabling csrf
 				//.anyRequest().denyAll().and().csrf().disable()
 				// enabling scrf
 				.anyRequest().denyAll().and()
 				.logout().logoutSuccessUrl("/");
+		// custor CSRF configuration
+		
+		http.csrf(csrfCustomizer ->{
+		csrfCustomizer.ignoringAntMatchers("/showReg");
+		RequestMatcher  requestMatchers = new MvcRequestMatcher(new HandlerMappingIntrospector(), "/getCoupon");
+		requestMatchers = new RegexRequestMatcher(  "/coupon-rest-api/*", "POST");
+		csrfCustomizer.ignoringRequestMatchers(requestMatchers);
+		});
+		
 	}
 
 	@Bean
