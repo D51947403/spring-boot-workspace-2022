@@ -1,4 +1,4 @@
-<html>
+<html  xmlns:th=https://www.thymeleaf.org/>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Register User</title>
@@ -17,11 +17,15 @@ Confirm Password: <input type="password" name="confirmPassword"/>
 </form>
 
 <br/>
-	<a href="/index">Welcome Page</a>
-	
-	<br/>
+	<a href="/index">Home</a>
+ <br/>
 	<!-- for logout no need to write any controller method -->
-	<a href="/logout">Logout</a>
+	<!-- <a href="/logout">Logout</a> -->
+	
+		<!-- In case of csrf enabled post logout is working -->
+	<form th:action="@{/logout}" method="post">
+    <input type="submit" value="POST LOGOUT"></input>
+     </form>
 	
 </body>
 </html>

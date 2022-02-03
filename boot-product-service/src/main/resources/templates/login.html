@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html  xmlns:th=https://www.thymeleaf.org/>
 <head>
 <meta charset="ISO-8859-1">
 <title>Logic Page</title>
@@ -8,7 +8,7 @@
 	<b> Logic Page </b>
 
 	<br />
-	<form action="/login" method="post">
+	<form   th:action="@{/login}"  method="post">
 
 		<br /> user Name : <input type="text" name="email" /> <br />
 		<br /> password :<input type="password" name="password" /> <input

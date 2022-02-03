@@ -10,6 +10,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.security.web.util.matcher.RegexRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import com.singraul.product.service.UserDetailsServiceImpl;
 
@@ -32,7 +36,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	   .mvcMatchers(HttpMethod.GET, "/index").hasAnyRole("ADMIN","USER")
 	   .mvcMatchers(HttpMethod.GET, "/","/showReg").permitAll()
 	   .mvcMatchers(HttpMethod.POST , "/login","/registerUser").permitAll()
-	   .anyRequest().denyAll().and().csrf().disable().logout().logoutSuccessUrl("/");
+	   // disabling csrf
+	 //  .anyRequest().denyAll().and().csrf().disable().logout().logoutSuccessUrl("/");
+	   .anyRequest().denyAll().and().logout().logoutSuccessUrl("/");
+	   
+	   http.csrf(csrfCustomizer -> {
+		   csrfCustomizer.ignoringAntMatchers("/showReg");
+		   RequestMatcher  requestMatchers = new RegexRequestMatcher("/product-rest-api/*", "GET");
+		   requestMatchers = new MvcRequestMatcher(new HandlerMappingIntrospector(), "/registerUser");
+		   csrfCustomizer.ignoringRequestMatchers(requestMatchers);
+	   });
+	   
 	}
 	
 	@Bean
