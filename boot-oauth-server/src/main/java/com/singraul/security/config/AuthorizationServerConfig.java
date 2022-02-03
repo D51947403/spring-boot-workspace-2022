@@ -35,8 +35,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@Autowired
-	private DataSource dataSource;
 
 	@Value("${jskKeyFile}")
 	private String jskKeyFile;
@@ -45,25 +43,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Value("${jskAlias}")
 	private String jskAlias;
 
-	// for inMemory token Store
-	/*
-	 * @Override public void configure(AuthorizationServerEndpointsConfigurer
-	 * endpoints) throws Exception {
-	 * 
-	 * endpoints.tokenStore(new
-	 * InMemoryTokenStore()).authenticationManager(authenticationManager).
-	 * userDetailsService(userDetailsService); }
-	 */
-
-	// for database token Store
-	/*
-	 * @Override public void configure(AuthorizationServerEndpointsConfigurer
-	 * endpoints) throws Exception {
-	 * 
-	 * endpoints.tokenStore(new
-	 * JdbcTokenStore(dataSource)).authenticationManager(authenticationManager).
-	 * userDetailsService(userDetailsService); }
-	 */
 
 	// for jwt token store
 
