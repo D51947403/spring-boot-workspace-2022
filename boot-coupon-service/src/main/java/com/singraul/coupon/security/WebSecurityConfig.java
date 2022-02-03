@@ -33,23 +33,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		//http.formLogin();
 		// coupon code must be only ALPHABET --> Regular expression
 		http.authorizeRequests().mvcMatchers(HttpMethod.GET, "/coupon-rest-api/coupon/{code:^[A-Z]*$}",
-				"/index" ,"/createCoupon").hasAnyRole("ADMIN", "USER")
+				"/index" ,"/createCoupon")
+		        //.hasAnyRole("ADMIN", "USER")
+		        .permitAll()
 				.mvcMatchers(HttpMethod.POST, "/coupon-rest-api/coupon" , "/saveCoupon").hasRole("ADMIN")
 				.mvcMatchers("/login" ,"/" ,"/registerUser","/getCoupon","/showReg").permitAll()
-				// disabling csrf
-				//.anyRequest().denyAll().and().csrf().disable()
-				// enabling scrf
 				.anyRequest().denyAll().and()
 				.logout().logoutSuccessUrl("/");
-		// custor CSRF configuration
-		
-		http.csrf(csrfCustomizer ->{
-		csrfCustomizer.ignoringAntMatchers("/showReg");
-		RequestMatcher  requestMatchers = new MvcRequestMatcher(new HandlerMappingIntrospector(), "/getCoupon");
-		requestMatchers = new RegexRequestMatcher(  "/coupon-rest-api/*", "POST");
-		csrfCustomizer.ignoringRequestMatchers(requestMatchers);
-		});
-		
+
 	}
 
 	@Bean
