@@ -17,13 +17,24 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	private static final String RESOURCE_ID = "oauth-app-service";
 
-	@Value("${publicKey}")
-	private String publicKey;
-
+	/*
+	 * @Value("${publicKey}") private String publicKey;
+	 */
+	// text private key
+	@Value("${testSignKey}")
+	private String testSignKey;
+	
+	/*
+	 * @Override public void configure(ResourceServerSecurityConfigurer resources)
+	 * throws Exception {
+	 * 
+	 * resources.resourceId(RESOURCE_ID); }
+	 */
+	// using symmetric key 
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
 
-		resources.resourceId(RESOURCE_ID);
+		resources.resourceId(RESOURCE_ID).tokenStore(tokenStore());
 	}
 	
 	@Override
@@ -35,7 +46,17 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 				
 	}
 	
-
+// these method no longer in use while using dynamic public key
+	/*
+	 * @Bean public TokenStore tokenStore() { return new
+	 * JwtTokenStore(jwtAccessTokenConverter()); }
+	 * 
+	 * @Bean public JwtAccessTokenConverter jwtAccessTokenConverter() {
+	 * JwtAccessTokenConverter jwtAccessTokenConverter = new
+	 * JwtAccessTokenConverter(); jwtAccessTokenConverter.setVerifierKey(publicKey);
+	 * return jwtAccessTokenConverter; }
+	 */
+	
 	@Bean
 	public TokenStore tokenStore() {
 		return new JwtTokenStore(jwtAccessTokenConverter());
@@ -44,7 +65,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Bean
 	public JwtAccessTokenConverter jwtAccessTokenConverter() {
 		JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
-		jwtAccessTokenConverter.setVerifierKey(publicKey);
+		// using symmetric key or private key
+		jwtAccessTokenConverter.setSigningKey(testSignKey);
 		return jwtAccessTokenConverter;
 	}
 }
