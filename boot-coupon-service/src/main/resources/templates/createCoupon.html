@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html  xmlns:th=https://www.thymeleaf.org/>
 <head>
 <meta charset="ISO-8859-1">
 <title>Create Coupon</title>
@@ -8,11 +8,17 @@
 	<b> Create Coupon </b>
 	<br />
 	<br />
-	<form action="/saveCoupon" method="post">
+
+	<form   th:action="@{/saveCoupon}"  method="post">
 		Code : <input type="text" name="code" /> <br />
 		<br /> Discount : <input type="number" name="discount" /> <br />
 		<br /> Expiry Date :<input type="text" name="expDate" /> <input
 			type="submit" name="Save" /> <input type="reset" name="Clear" />
 	</form>
+	
+	<a href="/index">Home</a>
+ <br/>
+	<!-- for logout no need to write any controller method -->
+	<a href="/logout">Logout</a>
 </body>
 </html>

@@ -29,10 +29,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		//http.formLogin();
 		// coupon code must be only ALPHABET --> Regular expression
 		http.authorizeRequests().mvcMatchers(HttpMethod.GET, "/coupon-rest-api/coupon/{code:^[A-Z]*$}" 
-				,"/index" , "/getCoupon").hasAnyRole("ADMIN", "USER")
-				.mvcMatchers(HttpMethod.POST, "/coupon-rest-api/coupon" , "/createCoupon","/saveCoupon").hasRole("ADMIN")
+				,"/index" , "/getCoupon","/createCoupon").hasAnyRole("ADMIN", "USER")
+				.mvcMatchers(HttpMethod.POST, "/coupon-rest-api/coupon" , "/saveCoupon").hasRole("ADMIN")
 				.mvcMatchers("/login" ,"/", "/showReg" ,"/registerUser").permitAll()
-				.anyRequest().denyAll().and().csrf().disable()
+				// disabling csrf
+				//.anyRequest().denyAll().and().csrf().disable()
+				// enabling scrf
+				.anyRequest().denyAll().and()
 				.logout().logoutSuccessUrl("/");
 	}
 

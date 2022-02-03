@@ -1,11 +1,12 @@
-<html>
+<html  xmlns:th=https://www.thymeleaf.org/>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Register User</title>
 </head>
 <body>
 <h2>User Registration:</h2>
-<form action="/registerUser" method="post">
+
+<form th:action="@{/registerUser}"  method="post">
 <pre>
 First Name: <input type="text" name="firstName"/>
 Last Name:  <input type="text" name="lastName"/>
@@ -16,5 +17,9 @@ Confirm Password: <input type="password" name="confirmPassword"/>
 </pre>
 </form>
 
+	<a href="/index">Home</a>
+ <br/>
+	<!-- for logout no need to write any controller method -->
+	<a href="/logout">Logout</a>
 </body>
 </html>
