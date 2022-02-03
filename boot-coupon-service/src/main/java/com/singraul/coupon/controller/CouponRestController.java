@@ -1,6 +1,7 @@
 package com.singraul.coupon.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,7 @@ public class CouponRestController {
 		return couponRepo.save(coupon);
 	}
 
+	@PostAuthorize(value = "returnObject.discount<60")
 	@RequestMapping(value = "/coupon/{code}", method = RequestMethod.GET)
 	public Coupon getCouponByCode(@PathVariable("code") String code) {
 		return couponRepo.getCouponByCode(code);

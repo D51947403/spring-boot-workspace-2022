@@ -1,6 +1,7 @@
 package com.singraul.coupon.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,11 @@ public class CouponController {
 		return "index";
 	}
 
+	
 	@GetMapping("/createCoupon")
+	// spring expression language 
+	// AOP programming 
+	@PreAuthorize(value = "hasRole('ADMIN')")
 	public String createCoupon() {
 		return "createCoupon";
 	}

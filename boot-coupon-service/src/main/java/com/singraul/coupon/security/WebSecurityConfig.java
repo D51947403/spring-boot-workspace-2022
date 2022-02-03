@@ -20,8 +20,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import com.singraul.coupon.service.UserDetailServiceImpl;
-
-@Configuration
+// comment to enable method level security
+//@Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
