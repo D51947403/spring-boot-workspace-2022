@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
@@ -29,7 +30,8 @@ class BootCouponServiceApplicationTests {
 
 	@Test
 	// default user role is USER
-	@WithMockUser
+	//@WithMockUser
+	@WithUserDetails("singrauld@yahoo.com")
 	public void testGetCouponCodeWithoutAuth_success() throws Exception {
 		mvc.perform(get("/coupon-rest-api/coupon/SUPERSALE")).andExpect(status().isOk());
 	}
