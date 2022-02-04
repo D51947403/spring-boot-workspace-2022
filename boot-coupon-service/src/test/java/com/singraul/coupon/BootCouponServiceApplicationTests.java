@@ -24,6 +24,11 @@ class BootCouponServiceApplicationTests {
 	MockMvc mvc;
 
 	@Test
+	public void testGetCouponCodeWithoutAuth_unauthorized() throws Exception {
+		mvc.perform(get("/coupon-rest-api/coupon/SUPERSALE")).andExpect(status().isUnauthorized());
+	}
+	
+	@Test
 	public void testGetCouponCodeWithoutAuth_forbidden() throws Exception {
 		mvc.perform(get("/coupon-rest-api/coupon/SUPERSALE")).andExpect(status().isForbidden());
 	}

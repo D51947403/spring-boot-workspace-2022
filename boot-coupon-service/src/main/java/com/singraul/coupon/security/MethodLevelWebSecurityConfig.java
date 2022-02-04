@@ -27,7 +27,7 @@ public class MethodLevelWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-	
+	 http.httpBasic();
 	}
 
 	@Bean
