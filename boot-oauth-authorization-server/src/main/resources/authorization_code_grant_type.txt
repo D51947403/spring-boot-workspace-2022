@@ -1,0 +1,3 @@
+http://localhost:9092/oauth/authorize?response_type=code&&client_id=boot-oauth-app&scope=read 
+
+http://localhost:9092/oauth/authorize?response_type=code&&client_id=boot-oauth-app&scope=read
