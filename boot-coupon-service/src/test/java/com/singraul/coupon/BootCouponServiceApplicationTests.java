@@ -1,9 +1,10 @@
 package com.singraul.coupon;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
@@ -13,8 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -51,5 +50,18 @@ class BootCouponServiceApplicationTests {
 		.content("{\"code\":\"SUPERSALETWO\",\"discount\":50.000,\"expDate\":\"26-Jun-2022\"}")
 		.contentType(MediaType.APPLICATION_JSON).with(csrf().asHeader()))	
 		.andExpect(status().isOk());
+	}
+	
+	@Test
+	@WithMockUser (roles= {"ADMIN"})
+	public void testCors() throws Exception {
+		mvc.perform(options("/coupon-rest-api/coupon/")
+				.header("Access-Control-Request-Method", "POST")
+				.header("Origin", "www.mainaha.com"))
+		 .andExpect(header().exists("Access-Control-Allow-Origin"))
+		 .andExpect(header().string("Access-Control-Allow-Origin", "*"))
+		 .andExpect(header().exists("Access-Control-Allow-Methods"))
+		 .andExpect(header().string("Access-Control-Allow-Methods", "POST") );
+				
 	}
 }
