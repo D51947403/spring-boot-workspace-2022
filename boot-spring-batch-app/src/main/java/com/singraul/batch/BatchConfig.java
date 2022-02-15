@@ -31,7 +31,9 @@ public class BatchConfig {
 	@Bean
 	public Step step() {
 		return sbf.get("step1")
-				.<String,String>chunk(1)
+				//.<String,String>chunk(1)
+				//change in chunk size
+				.<String,String>chunk(3)
 				.reader(reader())
 				.writer(writer())
 				.processor(processor())
