@@ -1,5 +1,7 @@
 package com.singraul.boot.restapi.product.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tt_product")
-public class Product {
+public class Product implements Serializable{
+	private static final long serialVersionUID = 1L;
 	// for primary key
 	@Id
 	// for auto increment

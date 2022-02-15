@@ -20,8 +20,8 @@ class BootRestapiProductApplicationTests {
 	@Test
 	void testGetApi() {
 		System.out.println("BaseURL : "+BaseURL);
-//	Product product = rest.getForObject("http://localhost:8080/product-rest-api/products/102", Product.class);
-		Product product = rest.getForObject(BaseURL + "102", Product.class);
+//	Product product = rest.getForObject("http://localhost:8080/product-rest-api/products/101", Product.class);
+		Product product = rest.getForObject(BaseURL + "101", Product.class);
 		System.out.println("product " + product);
 		Assert.notNull(product);
 		Assert.hasText(product.getProdName(), "Torch");
