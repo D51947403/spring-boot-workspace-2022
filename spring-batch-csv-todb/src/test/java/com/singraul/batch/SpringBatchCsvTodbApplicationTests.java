@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BootSpringBatchAppApplicationTests {
+class SpringBatchCsvTodbApplicationTests {
 
 	@Autowired
 	JobLauncher jobLauncher ;
@@ -26,5 +26,6 @@ class BootSpringBatchAppApplicationTests {
 		JobParameters jobParameters = new JobParametersBuilder().addLong("time", System.currentTimeMillis()).toJobParameters();
 		jobLauncher.run(job, jobParameters );
 	}
+
 
 }
