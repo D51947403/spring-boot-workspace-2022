@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import com.singraul.batch.model.Product;
 
@@ -61,10 +62,10 @@ public class BatchConfig {
 		BeanWrapperFieldSetMapper<Product> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
 
 		fieldSetMapper.setTargetType(Product.class);
+		
+		lineMapper.setFieldSetMapper(fieldSetMapper);
 
 		lineMapper.setLineTokenizer(lineTokenizer);
-
-		lineMapper.setFieldSetMapper(fieldSetMapper);
 
 		lineMapper.afterPropertiesSet();
 
@@ -85,10 +86,23 @@ public class BatchConfig {
 	public ItemWriter<Product> writer() {
 		JdbcBatchItemWriter<Product> writer = new JdbcBatchItemWriter<Product>();
 		writer.setDataSource(this.dataSource);
+		//writer.setDataSource(dataSource());
 		writer.setSql("INSERT INTO PRODUCT (ID,NAME,DESCRIPTION,PRICE) VALUES (:id,:name,:description,:price)");
 		writer.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<Product>());
 		writer.afterPropertiesSet();
 		return writer;
 	}
+	
+//	@Bean 
+//	public DataSource dataSource() {
+//		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+//		
+//		driverManagerDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+//		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/mydb");
+//		driverManagerDataSource.setUsername("boot");
+//		driverManagerDataSource.setPassword("boot");
+//		
+//		return driverManagerDataSource;
+//	}
 
 }
