@@ -13,20 +13,20 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class MySecurityConfig {
 
-	@Bean 
-	UserDetailsService  userDetailService() {
-		InMemoryUserDetailsManager userDetailService=	new InMemoryUserDetailsManager();
-		UserDetails user = User.withUsername("Devendra")
-				.password(passwordEncoder().encode("Devendra")).authorities("read").build();
-		userDetailService.createUser(user);
-		return userDetailService;
-	}
-	
-	@Bean
-	BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-	
+//	@Bean 
+//	UserDetailsService  userDetailService() {
+//		InMemoryUserDetailsManager userDetailService=	new InMemoryUserDetailsManager();
+//		UserDetails user = User.withUsername("Devendra")
+//				.password(passwordEncoder().encode("Devendra")).authorities("read").build();
+//		userDetailService.createUser(user);
+//		return userDetailService;
+//	}
+//	
+//	@Bean
+//	BCryptPasswordEncoder passwordEncoder() {
+//		return new BCryptPasswordEncoder();
+//	}
+//	
 	@Bean
 	 SecurityFilterChain filterChain(HttpSecurity http ) throws Exception{
 		
