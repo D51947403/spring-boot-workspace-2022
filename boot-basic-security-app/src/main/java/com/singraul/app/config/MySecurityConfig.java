@@ -21,16 +21,18 @@ public class MySecurityConfig {
 //		userDetailService.createUser(user);
 //		return userDetailService;
 //	}
-//	
-//	@Bean
-//	BCryptPasswordEncoder passwordEncoder() {
-//		return new BCryptPasswordEncoder();
-//	}
-//	
+	
+	@Bean
+	BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
 	@Bean
 	 SecurityFilterChain filterChain(HttpSecurity http ) throws Exception{
 		
-		http.httpBasic();
+	//	http.httpBasic();
+		// form based login
+		http.formLogin();
 		http.authorizeHttpRequests().anyRequest().authenticated();
 		return http.build();
 		
